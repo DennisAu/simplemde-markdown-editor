@@ -2,7 +2,7 @@
 
 var gulp = require('gulp');
 var cleanCSS = require('gulp-clean-css');
-var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglifyes');
 var concat = require('gulp-concat');
 var header = require('gulp-header');
 var buffer = require('vinyl-buffer');
