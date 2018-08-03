@@ -634,14 +634,22 @@ function drawImage(editor) {
 	var cm = editor.codemirror;
 	var stat = getState(cm);
 	var options = editor.options;
-	var url = "http://";
-	if(options.promptURLs) {
-		url = prompt(options.promptTexts.image);
-		if(!url) {
-			return false;
+
+	if (options.insertImageCallback) {
+		options.insertImageCallback(function(title, url) {
+			cm.replaceSelection(`![${title}](${url})`);
+			cm.focus();
+		});
+	} else {
+		var url = "http://";
+		if(options.promptURLs) {
+			url = prompt(options.promptTexts.image);
+			if(!url) {
+				return false;
+			}
 		}
+		_replaceSelection(cm, stat.image, options.insertTexts.image, url);
 	}
-	_replaceSelection(cm, stat.image, options.insertTexts.image, url);
 }
 
 /**
